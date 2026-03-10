@@ -1,31 +1,33 @@
 package com.seveneleven.trainconsistmanagementapp.main;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
+import java.util.LinkedHashSet;
+
+
+import java.util.Scanner;
+import java.util.Set;
 
 /**
  * =======================================
  * MAIN CLASS - TrainConsistManagementApp
  * =======================================
  * 
- * Use Case 4: Maintain Ordered Bogie Consist
+ * Use Case 5: Preserve Insertion Order of Bogies
  * 
  * Description:
- * This class models the physical chaining of train bogies
- * using LinkedList for ordered operations.
+ * This class maintains the exact attachment order of bogies
+ * while also preventing duplicate entries using LinkedHashSet.
  * 
  * At this stage, the application:
- * - Adds bogies in a sequence
- * - Inserts bogies at specific positions
- * - Removes bogies from front and rear
- * - Displays updated train structure
+ * - Attaches bogies in order
+ * - Preserves insertion sequence
+ * - Avoids duplicate bogies
+ * - Displays final train formation
  * 
- * This maps positional operations using LinkedList.
+ * This maps ordered uniqueness using LinkedHashSet.
  * 
  * @author Preetham
- * @version 4.0
+ * @version 5.0
  */
 public class TrainConsistManagementApp {
 	
@@ -40,28 +42,25 @@ public class TrainConsistManagementApp {
 		
 		// Display welcome banner
 		System.out.println("==========================================");
-		System.out.println("   === Train Consist Management App ===   ");
+		System.out.println("   Train Consist Management App  ");
 		System.out.println("==========================================");
 		
-		// LinkedList maintains insertion order and allows fast inserts
-		List<String> trainConsist = new LinkedList<>();
+		// LinkedHashSet preserves order and ensures uniqueness
+		Set<String> formation = new LinkedHashSet<>();
 		
 		//Display initial consist information
 		System.out.println("Train initializaed sucessfully");
-		System.out.println("Inital Bogie Count: " + trainConsist.size());
-		System.out.println("Current Train Consist: " + trainConsist);
+		System.out.println("Inital Bogie Count: " + formation.size());
+		System.out.println("Current Train Consist: " + formation);
 		System.out.println("\nSystem ready for operations\n");
 		
 		boolean inMenu = true;
 		
 		while(inMenu) {
 			System.out.println("1. Add Bogies");
-			System.out.println("2. Add Bogie to Front");
-			System.out.println("3. Add Bogie to Back");
-			System.out.println("4. Remove Bogie From Front");
-			System.out.println("5. Remove Bogie From Back");
-			System.out.println("6. Check if a Bogie is Present");
-			System.out.println("7. Display Consists");
+			System.out.println("2. Remove Bogies");
+			System.out.println("3. Check if Bogie Exists");
+			System.out.println("4. Display Consists");
 			System.out.println("0. Exit");
 			System.out.print("Enter Choice: ");
 			String choice = scanner.nextLine();
@@ -70,59 +69,34 @@ public class TrainConsistManagementApp {
 				case "1" -> {
 					System.out.print("Enter the name of bogie to add: ");
 					String bogie = scanner.nextLine();
-					
-					System.out.print("Enter the position of the bogie: ");
-					String position = scanner.nextLine();
-					
-					
-					
-					trainConsist.add(Integer.parseInt(position), bogie);
-					System.out.printf("Added bogie [%s] to train successfully.\n", bogie);
-					
+			
+					if(formation.add(bogie)) {
+						System.out.printf("Added bogie [%s] to train successfully.\n", bogie);
+					}else {
+						System.out.printf("Duplicate Ignored: [%s] already in train.\n", bogie);
+					}
 					
 					yield true;
 				}
 				case "2" -> {
-					System.out.print("Enter the name of bogie to add: ");
+					System.out.print("Enter name of bogie to remove: ");
 					String bogie = scanner.nextLine();
 					
+					if(!formation.contains(bogie)) {
+						System.out.printf("The bogie [%s] does not exist.\n", bogie);
+						yield true;
+					}
 					
-					trainConsist.addFirst(bogie);
-					System.out.printf("Added bogie [%s] to front of the train successfully.\n", bogie);
-					
+					formation.remove(bogie);
+					System.out.printf("Removed bogie [%s] from train successfully.\n", bogie);
 					
 					yield true;
 				}
 				case "3" -> {
-					System.out.print("Enter the name of bogie to add: ");
-					String bogie = scanner.nextLine();
-					
-					
-					trainConsist.addLast(bogie);
-					System.out.printf("Added bogie [%s] to back of the train successfully.\n", bogie);
-					
-					
-					yield true;
-				}
-				case "4" -> {
-					
-					String bogie = trainConsist.removeFirst();
-					System.out.printf("Removed bogie [%s] from front of the train successfully.\n", bogie);
-					
-					yield true;
-				}
-				case "5" -> {
-					
-					String bogie = trainConsist.removeLast();
-					System.out.printf("Removed bogie [%s] from front of the back of the train successfully.\n", bogie);
-					
-					yield true;
-				}
-				case "6" -> {
 					System.out.print("Enter name of bogie to check: ");
 					String bogie = scanner.nextLine();
 					
-					if(trainConsist.contains(bogie)) {
+					if(formation.contains(bogie)) {
 						System.out.printf("Contains \'%s\'? :  true\n", bogie);
 					} else {
 						System.out.printf("Contains \'%s\'? :  false\n", bogie);
@@ -130,8 +104,8 @@ public class TrainConsistManagementApp {
 					
 					yield true;
 				}
-				case "7" -> {
-					System.out.println(trainConsist);
+				case "4" -> {
+					System.out.println(formation);
 					yield true;
 				}
 				case "0" -> {
