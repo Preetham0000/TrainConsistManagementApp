@@ -8,154 +8,242 @@ A console-based Java application that simulates railway train consist management
 
 The application models a train consist as a collection of bogies connected to an engine. It supports passenger bogies, goods bogies, cargo validation, seat capacity tracking, and train safety compliance.
 
+# UC1 – Initialize Train and Display Consist Summary
+ 
+## Actions performed
+- Start the application.
+- Print welcome message.
+- Initialize an empty train consist.
+- Display initial bogie count.
+ 
+## Functions / Methods Used
+- `public static void main(String[] args)`
+- `System.out.println()`
+- `new ArrayList<>()`
+- `size()`
+ 
+# UC2 – Add Passenger Bogies to Train
+ 
+##  Actions performed
+- Create a list of passenger bogies.
+- Add bogies (Sleeper, AC Chair, First Class).
+- Remove a bogie.
+- Check if a bogie exists.
+ 
+## Functions / Methods Used
+- `add()`
+- `remove()`
+- `contains()`
+- `System.out.println()`
+ 
+# UC3 – Track Unique Bogie IDs
+ 
+## Actions performed
+- Store bogie IDs in a set.
+- Add duplicate IDs intentionally.
+- Verify duplicates are automatically removed.
+ 
+## Functions / Methods Used
+- `HashSet`
+- `add()`
+- `System.out.println()`
+ 
+# UC4 – Maintain Ordered Train Consist
+ 
+## Actions performed
+- Create train consist using LinkedList.
+- Add engine and bogies.
+- Insert a pantry car in middle.
+- Remove first and last bogies.
+ 
+## Functions / Methods Used
+- `addFirst()`
+- `addLast()`
+- `add(index, element)`
+- `removeFirst()`
+- `removeLast()`
+ 
+# UC5 – Preserve Insertion Order
+ 
+## Actions performed
+- Use LinkedHashSet to maintain bogie order.
+- Add bogies.
+- Attempt duplicate insertion.
+- Print formation.
+ 
+## Functions / Methods Used
+- `LinkedHashSet`
+- `add()`
+- `System.out.println()`
+ 
+# UC6 – Map Bogie to Capacity
+ 
+## Actions performed
+- Store bogie name and capacity.
+- Create key-value mapping.
+- Print capacity for each bogie.
+ 
+## Functions / Methods Used
+- `HashMap`
+- `put()`
+- `entrySet()`
+- `forEach / loop`
+ 
+# UC7 – Sort Bogies by Capacity
+ 
+## What You Do
+- Create Bogie class.
+- Store bogies in a list.
+- Sort them by capacity.
+ 
+## Functions / Methods Used
+- `Comparator.comparingInt()`
+- `sort()`
+- `List.add()`
+ 
+# UC8 – Filter Passenger Bogies Using Streams
+ 
+##  Actions performed
+- Convert bogie list to stream.
+- Filter bogies with capacity greater than threshold.
+- Collect results.
+ 
+## Functions / Methods Used
+- `stream()`
+- `filter()`
+- `collect()`
+- `toList()`
+ 
+# UC9 – Group Bogies by Type
+ 
+##  Actions performed
+- Convert list into stream.
+- Group bogies based on type.
+- Store grouped result in map.
+ 
+## Functions / Methods Used
+- `stream()`
+- `Collectors.groupingBy()`
+- `Map`
+ 
+# UC10 – Count Total Seats
+ 
+## Actions performed
+- Extract capacities from bogies.
+- Sum them to calculate total seating.
+ 
+## Functions / Methods Used
+- `map()`
+- `reduce()`
+- `Integer::sum`
+ 
+# UC11 – Validate Train ID and Cargo Codes
+ 
+## Actions performed
+- Accept Train ID and Cargo Code.
+- Validate format using regex.
+ 
+## Functions / Methods Used
+- `Pattern.compile()`
+- `Matcher`
+- `matches()`
+ 
+# UC12 – Safety Compliance Check
+ 
+## Actions performed
+- Validate cargo assignment rules.
+- Ensure cylindrical bogies carry petroleum only.
+ 
+## Functions / Methods Used
+- `stream()`
+- `allMatch()`
+- `lambda expressions`
+ 
+# UC13 – Performance Comparison
+ 
+## Actions performed
+- Measure execution time for loop-based logic.
+- Measure execution time for stream-based logic.
+- Compare results.
+ 
+## Functions / Methods Used
+- `System.nanoTime()`
+- `stream()`
+- `filter()`
+- `for loop`
+ 
 ---
-
-## Features
-
-- Train consist initialization
-- Passenger bogie management
-- Goods bogie handling
-- Unique bogie ID tracking
-- Ordered train formation management
-- Bogie capacity mapping
-- Sorting and searching operations
-- Stream API processing
-- Regex-based validation
-- Safety compliance checks
-- Performance benchmarking
-- Custom exception handling
-- Algorithm implementation using sorting and searching techniques
-
----
-
-## Core Functionalities
-
-### Train Initialization
-- Initialize train consist
-- Display train summary
-- Maintain dynamic bogie collections
-
-### Passenger Bogie Management
-- Add and remove passenger bogies
-- Track seating capacities
-- Manage train composition
-
-### Goods Bogie Management
-- Handle cargo assignments
-- Validate cargo safety rules
-- Enforce goods transport constraints
-
-### Bogie Tracking
-- Maintain unique bogie IDs
-- Preserve insertion order
-- Manage ordered train formations
-
-### Capacity Management
-- Map bogies with seating/load capacities
-- Calculate total train seating capacity
-- Filter high-capacity bogies
-
-### Sorting and Searching
-- Sort bogies by capacity and names
-- Implement Bubble Sort
-- Use Arrays.sort()
-- Perform Linear Search
-- Perform Binary Search
-
-### Stream API Operations
-- Filter bogies using streams
-- Group bogies by category
-- Aggregate seat capacities
-- Perform stream-based validations
-
-### Validation and Safety
-- Validate Train IDs and Cargo Codes using Regex
-- Enforce safety compliance rules
-- Prevent unsafe cargo assignments
-
-### Exception Handling
-- Handle invalid bogie capacities
-- Manage runtime cargo assignment errors
-- Apply defensive programming practices
-
-### Performance Analysis
-- Compare loop-based and stream-based execution
-- Benchmark operations using System.nanoTime()
-
----
-
-## Concepts Covered
-
-### Java Collections
-- ArrayList
-- LinkedList
-- HashSet
-- LinkedHashSet
-- TreeSet
-- HashMap
-
-### Algorithms
-- Bubble Sort
-- Linear Search
-- Binary Search
-- Sorting Techniques
-
-### Stream API
-- filter()
-- map()
-- reduce()
-- groupingBy()
-- collect()
-
-### Functional Programming
-- Lambda Expressions
-- Comparator
-- Method References
-
-### Exception Handling
-- Custom Exceptions
-- try-catch-finally
-- Checked and Unchecked Exceptions
-- IllegalStateException
-
-### Regex Validation
-- Pattern
-- Matcher
-- Input format validation
-
-### Performance Optimization
-- Time complexity awareness
-- Benchmarking techniques
-- Loop vs Stream comparison
-
----
-
-## Project Structure
-
-```bash
-Train-Consist-Management-App/
-│
-├── src/
-│   ├── models/
-│   │   ├── Bogie.java
-│   │   ├── PassengerBogie.java
-│   │   └── GoodsBogie.java
-│   │
-│   ├── exceptions/
-│   │   ├── InvalidCapacityException.java
-│   │   └── CargoSafetyException.java
-│   │
-│   ├── services/
-│   │   ├── TrainService.java
-│   │   ├── ValidationService.java
-│   │   └── SearchService.java
-│   │
-│   ├── algorithms/
-│   │   ├── BubbleSort.java
-│   │   ├── LinearSearch.java
-│   │   └── BinarySearch.java
-│   │
-│   └── Main.java
-│
-└── README.md
-```
+ 
+# UC14 – Handle Invalid Bogie Capacity
+ 
+## Actions performed
+- Create custom exception.
+- Validate capacity during bogie creation.
+- Throw exception if capacity ≤ 0.
+ 
+## Functions / Methods Used
+- `throw`
+- `throws`
+- `extends Exception`
+ 
+# UC15 – Safe Cargo Assignment
+ 
+##  Actions performed
+- Validate cargo during runtime.
+- Handle unsafe cargo assignment using exception handling.
+ 
+## Functions / Methods Used
+- `try`
+- `catch`
+- `finally`
+- `throw`
+ 
+# UC16 – Manual Sorting (Bubble Sort)
+ 
+## Actions performed
+- Sort capacities manually using Bubble Sort.
+- Compare adjacent elements and swap.
+ 
+## Functions / Methods Used
+- `for loops`
+- `array indexing`
+- `swap logic`
+ 
+# UC17 – Sort Using Arrays.sort()
+ 
+## Actions performed
+- Sort bogie names alphabetically using built-in method.
+ 
+## Functions / Methods Used
+- `Arrays.sort()`
+- `Arrays.toString()`
+ 
+# UC18 – Linear Search for Bogie ID
+ 
+## Actions performed
+- Search bogie ID sequentially from list.
+ 
+## Functions / Methods Used
+- `for loop`
+- `equals()`
+ 
+# UC19 – Binary Search for Bogie ID
+ 
+## Actions performed
+- Search bogie ID in sorted list using binary search.
+ 
+## Functions / Methods Used
+- `compareTo()`
+- `while loop`
+- `mid calculation`
+ 
+ 
+# UC20 – Exception Handling During Search
+ 
+## Actions performed
+- Check if bogie list is empty.
+- Prevent searching when no bogies exist.
+ 
+## Functions / Methods Used
+- `if condition`
+- `throw new IllegalStateException()`
